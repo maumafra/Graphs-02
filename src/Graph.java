@@ -56,6 +56,24 @@ public class Graph {
         return transverseGraph;
     }
 
+    public Graph clone() {
+        Graph cloneGraph = new Graph();
+        cloneGraph.order = this.order;
+        for (int i = 0; i < cloneGraph.order; i++) {
+            Vertice vAux = this.listaVertices.get(i);
+            Vertice v = new Vertice(vAux.verticeName, vAux.index);
+            cloneGraph.listaVertices.add(v);
+        }
+        for (int i = 0; i < cloneGraph.listaVertices.size(); i++) {
+            for (int j = 0; j < cloneGraph.listaVertices.size(); j++) {
+                if (this.listaVertices.get(i).adjacents.contains(this.listaVertices.get(j))) {
+                    cloneGraph.listaVertices.get(i).adjacents.add(cloneGraph.listaVertices.get(j));
+                }
+            }
+        }
+        return cloneGraph;
+    }
+
     private boolean isValidEdge(String edgeValue) {
         if (edgeValue.equals("I")) {
             return false;
