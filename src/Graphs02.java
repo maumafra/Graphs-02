@@ -1,5 +1,6 @@
 //Alunos: Maurício Mafra Monnerat, Mauro Fialho
 
+import java.util.List;
 import java.util.Map;
 
 public class Graphs02 {
@@ -32,7 +33,7 @@ public class Graphs02 {
 
     public static void question2() {
         //Número de testes
-        int input1 = 1;
+        int input1 = 4;
         //Quantidade de vértices e arestas
         String input2 = "10 15";
         //Relacionamentos (Copiei dos requisitos)
@@ -46,6 +47,12 @@ public class Graphs02 {
         //substituir nessa variável edgesList.
         String[][] edgesList = Utils.convertStringToMatrix(input3, graphLength, 2);
         Graph graph = new Graph(edgesList, graphOrder);
-        StronglyConnectedComponents.getComponents(graph, input1);
+        List<Map<String, String>> result = StronglyConnectedComponents.getComponents(graph, input1);
+        System.out.println("---- Questão 2 ----");
+        for (Map<String, String> compInfo : result) {
+            System.out.println("#"+compInfo.get("TEST"));
+            System.out.println("##"+compInfo.get("COMPONENTS_LENGTH"));
+            System.out.println(compInfo.get("COMPONENTS"));
+        }
     }
 }
