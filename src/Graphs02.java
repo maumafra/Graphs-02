@@ -46,5 +46,6 @@ public class Graphs02 {
         //substituir nessa variável edgesList.
         String[][] edgesList = Utils.convertStringToMatrix(input3, graphLength, 2);
         Graph graph = new Graph(edgesList, graphOrder);
+        StronglyConnectedComponents.getComponents(graph, input1);
     }
 }
