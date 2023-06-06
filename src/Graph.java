@@ -1,6 +1,4 @@
 //Alunos: Maurício Mafra Monnerat, Mauro Fialho
-import jdk.jshell.execution.Util;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +34,26 @@ public class Graph {
         for (int row = 0; row < edgesList.length; row++) {
             listaVertices.get(Utils.indexOfCharacter(edgesList[row][0])).addAdjacent(listaVertices.get(Utils.indexOfCharacter(edgesList[row][1])));
         }
+    }
+
+    private Graph() {}
+
+    public Graph getTransverseGraph() {
+        Graph transverseGraph = new Graph();
+        transverseGraph.order = this.order;
+        for (int i = 0; i < transverseGraph.order; i++) {
+            Vertice vAux = this.listaVertices.get(i);
+            Vertice v = new Vertice(vAux.verticeName, vAux.index);
+            transverseGraph.listaVertices.add(v);
+        }
+        for (int i = 0; i < transverseGraph.listaVertices.size(); i++) {
+            for (int j = 0; j < transverseGraph.listaVertices.size(); j++) {
+                if (this.listaVertices.get(j).adjacents.contains(this.listaVertices.get(i))) {
+                    transverseGraph.listaVertices.get(i).adjacents.add(transverseGraph.listaVertices.get(j));
+                }
+            }
+        }
+        return transverseGraph;
     }
 
     private boolean isValidEdge(String edgeValue) {
