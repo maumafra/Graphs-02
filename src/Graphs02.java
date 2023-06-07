@@ -33,7 +33,7 @@ public class Graphs02 {
 
     public static void question2() {
         //Número de testes
-        int input1 = 4;
+        int input1 = 1;
         //Quantidade de vértices e arestas
         String input2 = "10 15";
         //Relacionamentos (Copiei dos requisitos)
