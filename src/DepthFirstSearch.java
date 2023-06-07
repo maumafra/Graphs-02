@@ -18,8 +18,8 @@ public class DepthFirstSearch {
         vertices.addAll(graphParam.listaVertices);
         vertices.remove(start);
         vertices.add(0, start);
-        depthFirstSearch();
-        return getResult();
+        depthFirstSearch(vertices);
+        return getResult(vertices);
     }
 
     public static Map<String, Map<Vertice, Integer>> search(Graph graphParam) {
@@ -28,6 +28,20 @@ public class DepthFirstSearch {
         closeTime = new int[graph.order];
         depthFirstSearch();
         return getResult();
+    }
+
+    private static Map<String, Map<Vertice, Integer>> getResult(List<Vertice> vertices) {
+        Map<String, Map<Vertice, Integer>> ret = new HashMap<>();
+        Map<Vertice, Integer> visitTimeMap = new HashMap<>();
+        Map<Vertice, Integer> closeTimeMap = new HashMap<>();
+        for (int i = 0; i < graph.order; i++) {
+            Vertice v = vertices.get(i);
+            visitTimeMap.put(v, visitTime[v.index]);
+            closeTimeMap.put(v, closeTime[v.index]);
+        }
+        ret.put("VISIT_TIME", visitTimeMap);
+        ret.put("CLOSE_TIME", closeTimeMap);
+        return ret;
     }
 
     private static Map<String, Map<Vertice, Integer>> getResult() {
@@ -47,6 +61,15 @@ public class DepthFirstSearch {
     private static void depthFirstSearch() {
         initDFS();
         for (Vertice u : graph.listaVertices) {
+            if (visitTime[u.index] == 0) {
+                visitDFS(u);
+            }
+        }
+    }
+
+    private static void depthFirstSearch(List<Vertice> vertices) {
+        initDFS();
+        for (Vertice u : vertices) {
             if (visitTime[u.index] == 0) {
                 visitDFS(u);
             }
